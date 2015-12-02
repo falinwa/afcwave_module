@@ -23,3 +23,12 @@ class SaleOrderLine(models.Model):
     tax_id_display = fields.Many2many('account.tax', string='Taxes', related="tax_id", readonly="1")
     
 #end of SaleOrderLine()
+
+class ResUsers(models.Model):
+    _name = "res.users"
+    _inherit = "res.users"
+
+    partner_price_list_id = fields.Many2one('product.pricelist', related="partner_id.property_product_pricelist", string="PriceList", required=1)
+    partner_sale_person_id = fields.Many2one('res.users', related="partner_id.user_id", string="Sale Person", required=1)
+    
+#end of ResUsers()

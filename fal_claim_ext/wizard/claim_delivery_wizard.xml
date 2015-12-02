@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="claim_delivery_wizard">
+            <field name="name">claim.delivery.wizard.form</field>
+            <field name="model">claim.delivery.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Claim Management" version="7.0">
+                    <group>
+                        <field name="serial_id" />
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                    
+                    <footer>
+                        <button name="save" type="object"
+                                string="Save" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                
+                </form>                
+            </field>
+        </record>
+
+
+        <act_window id="launch_session_claim_wizard"
+                    name="Save Claim"
+                    res_model="claim.delivery.wizard"
+                    view_mode="form"
+                    target="new"/>
+
+        
+    </data>
+</openerp>

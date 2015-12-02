@@ -1,0 +1,7 @@
+<openerp>
+    <data>
+        <record id="group_claim_manager" model="res.groups">
+            <field name="name">Claim Manager</field>
+        </record>
+    </data>
+</openerp>

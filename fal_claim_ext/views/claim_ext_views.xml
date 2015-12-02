@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <openerp>
+    <data>
+        
+
+        <record model="ir.ui.view" id="claim_ext_search_view">
+            <field name="name">claim.ext.search</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.view_crm_case_claims_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="serial_id"/>
+                    <field name="claim_number"/>
+                    <field name="user_id"/>
+                    <field name="partner_id"/>
+                    <field name="product_id"/>
+                </field>
+            </field>
+
+        </record>
+
+
+        <record model="ir.ui.view" id="claim_ext_form_view">
+            <field name="name">claim.ext.view</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]" position="before">
+                    <h1>
+                        <field name="claim_number" class="oe_inline" readonly="1"/>
+                    </h1>
+                </xpath>                
+                <field name="name" position="before">
+                    <field name="serial_id" string="Serial Number" on_change="on_change_serial_id(serial_id)" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                    <field name="product_id" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                </field>
+                <field name="section_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('stage_id', '=','done')]}</attribute>
+                </field>
+                 <field name="name" position="attributes">
+                    <attribute name="attrs">{'readonly': [('stage_id', '=','done')]}</attribute>
+                </field>
+                 <field name="date" position="attributes">
+                    <attribute name="attrs">{'readonly': [('stage_id', '=','done')]}</attribute>
+                </field>
+                    <field name="priority" position="attributes">
+                    <attribute name="attrs">{'readonly': [('stage_id', '=','done')]}</attribute>
+                </field>
+                 <field name="date_deadline" position="attributes">
+                    <attribute name="attrs">{'readonly': [('stage_id', '=','done')]}</attribute>
+                </field>
+                <field name="date" position="after">
+                    <field name="date_order" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                    <field name="salesperson" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                    <field name="sale_order" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                    <field name="deliver_order" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                    <field name="carrier"  attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                    <field name="carrier_tracking_ref"  attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                </field>
+                <xpath expr="//notebook/page[@string='Claim Description']/group/field[@name='partner_id']" position="replace">
+                </xpath>
+                <xpath expr="//notebook/page[@string='Claim Description']/group/field[@name='partner_phone']" position="replace">
+                </xpath>
+                <xpath expr="//notebook/page[@string='Claim Description']/group/field[@name='email_from']" position="replace">
+                </xpath>
+                <xpath expr="//notebook/page[@string='Claim Description']/field[@name='description']" position="replace">
+                </xpath>
+
+                <field name="date_deadline" position="after">
+                    <group colspan="4" col="4" groups="base.group_user">
+                        <separator colspan="4" string="Claim Reporter"/>
+                        <field name="partner_id" string="Partner"
+                        on_change="onchange_partner_id(partner_id)" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                        <field name="partner_phone" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                        <field name="email_from" widget="email" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                        <field name="partner_mphone" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                        <separator colspan="4" string="Claim/Action Description" />
+                            <field name="description" colspan="4" nolabel="1" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                </group>
+                </field>
+                <xpath expr="//notebook/page[@string='Claim Description']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//notebook/page[@string='Follow Up']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="claim_manager_action">
+            <field name="name">Claim Managment</field>
+            <field name="res_model">crm.claim</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+
+        <menuitem id="main_claimmanager_menu" name="Claim Management" sequence="80" groups="group_claim_manager"/>
+       
+        <menuitem id="claimmanager_menu" name="Claim Management"
+                  parent="main_claimmanager_menu"/>
+
+        <menuitem id="claim_menu" name="Claim Management" parent="claimmanager_menu"
+                  action="claim_manager_action" />
+
+        <record model="ir.ui.view" id="claim_ext_form_tree">
+            <field name="name">claim.ext.tree</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="claim_number" />
+                    <field name="serial_id" string="Serial Number" on_change="on_change_serial_id(serial_id)" attrs="{'readonly': [('stage_id', '=','done')]}"/>
+                </field>
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="claim_picking_tree">
+            <field name="name">stock.move.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <button name="%(launch_session_claim_wizard)d" type='action' string='Save Claim' />
+                </field>
+            </field>
+        </record>  
+
+    </data>
+</openerp>
