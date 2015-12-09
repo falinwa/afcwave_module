@@ -21,6 +21,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
     
     fal_quantity_perbox = fields.Float(string='Quantity per Box')
+    fal_empty_price = fields.Float(string="Empty Price")
     
     
 
