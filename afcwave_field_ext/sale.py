@@ -13,7 +13,16 @@ class SaleOrder(models.Model):
         if self.fal_payment_term == 'net30':
             pricelist = self.env['product.pricelist'].search([('name','ilike','distributor')])
             self.pricelist_id = pricelist and pricelist[0]
-    
+
+    @api.one
+    @api.depends('fal_payment_term')
+    def _compute_is_fal_payment_term_invisible(self):
+        if self.pricelist_id.name ilike 'distributor':            
+            self.is_fal_payment_term_invisible = False
+        else:
+            self.is_fal_payment_term_invisible = True
+            
+    is_fal_payment_term_invisible = fields.Boolean('Is Fal Payment Term Invisible', compute='_compute_is_fal_payment_term_invisible')    
     fal_payment_term = fields.Selection([('adv','TT in Advance'),('net30','Net 30')], 'Term of Payment')
     
     
