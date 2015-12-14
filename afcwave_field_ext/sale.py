@@ -2,6 +2,24 @@
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 
+class SaleOrder(models.Model):
+    _inherit = "sale.order"    
+
+    @api.onchange('fal_payment_term')
+    def _onchange_fal_payment_term(self):
+        if self.fal_payment_term == 'adv':
+            pricelist = self.env['product.pricelist'].search([('name','ilike','net 30')])
+            self.pricelist_id = pricelist and pricelist[0]
+        if self.fal_payment_term == 'net30':
+            pricelist = self.env['product.pricelist'].search([('name','ilike','distributor')])
+            self.pricelist_id = pricelist and pricelist[0]
+    
+    fal_payment_term = fields.Selection([('adv','TT in Advance'),('net30','Net 30')], 'Term of Payment')
+    
+    
+    
+#end of SaleOrder()
+
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
     
@@ -14,6 +32,8 @@ class SaleOrderLine(models.Model):
     
     fal_box_quantity = fields.Integer(string='Box Quantity')
     product_uom_qty_display = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'), related="product_uom_qty", readonly=1)
+    fal_quantity_available = fields.Float('Available Quantity', related="product_id.qty_available")
+    
 
 #end of SaleOrderLine()
 

@@ -18,14 +18,33 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="fal_portal_sale_ext.view_order_form_portal_user_falportalsalext" />
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="fal_payment_term" attrs="{'readonly': [('order_line', '!=', [])], 'invisible': [('pricelist_id','not ilike','distributor')]}" />
+                </xpath>               
+                <xpath expr="//notebook/page/field[@name='order_line']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('fal_payment_term', '=', False), ('pricelist_id','ilike','distributor')]}</attribute>
+                </xpath>
                 <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">                    
                     <field name="fal_box_quantity" />
                     <field name="product_uom_qty_display" />
+                    <field name="fal_quantity_available" />
                 </xpath>
             </field>
         </record>
+
+        <record id="view_order_form_afcwafextt" model="ir.ui.view">
+            <field name="name">sale.order.form.afcwafext</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
+                    <field name="fal_quantity_available" />
+                </xpath>
+            </field>
+        </record>
+            
     </data>
 </openerp>

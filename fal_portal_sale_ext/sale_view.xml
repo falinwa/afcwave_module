@@ -12,8 +12,7 @@
                     </header>
                     <sheet>
                         <h1>
-                            <label string="Quotation " attrs="{'invisible': [('state','not in',('draft','sent'))]}"/>
-                            <label string="Sales Order " attrs="{'invisible': [('state','in',('draft','sent'))]}"/>
+                            <label string="Order " attrs="{'invisible': [('state','in',('draft','sent'))]}"/>
                             <field name="name" class="oe_inline" readonly="1"/>
                         </h1>
                         <group>
@@ -110,8 +109,25 @@
         </record>
         <menuitem id="portal_create_order_falporsalext" parent="portal.portal_orders"
             action="action_orders_falporsalext" sequence="1"/>    
+        <menuitem name="PO" id="portal_sale.portal_quotations" parent="portal.portal_orders"
+            action="portal_sale.action_quotations_portal" sequence="10"/>
+        <menuitem name="Confirmed PO" id="portal_sale.portal_sales_orders" parent="portal.portal_orders"
+            action="portal_sale.action_orders_portal" sequence="20"/>
 
+        <record id="action_picking_tree_falportasalext" model="ir.actions.act_window">
+            <field name="name">Delivery Orders</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="context">{'contact_display': 'partner_address'}</field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+            <field name="help">You dont have any delivery order yet.</field>
+        </record>
 
+        <menuitem id="portal_delivery_order_falportalsext" parent="portal.portal_orders"
+            action="action_picking_tree_falportasalext" sequence="99"/>
+            
         <record id="view_users_form_falportasext" model="ir.ui.view">
             <field name="name">res.users.form.falportasext</field>
             <field name="model">res.users</field>
@@ -130,8 +146,6 @@
                             <field name="email" invisible="1"/>
                             <label for="login" class="oe_edit_only" string="Email Address"/>
                             <h2><field name="login" on_change="on_change_login(login)"/></h2>
-                            <label for="password" class="oe_edit_only" string="Password"/>
-                            <h2><field name="password" password="True" required="1"/></h2>
                             <label for="company_id" class="oe_edit_only" groups="base.group_multi_company"/>
                             <field name="company_id" context="{'user_preference': 0}" groups="base.group_multi_company"/>
                             <group>
@@ -140,6 +154,7 @@
                                 <field name="partner_price_list_id" />
                                 <field name="partner_sale_person_id" />
                                 <field name="lang" />
+                                <field name="partner_country_id" />
                                 <field name="active"/>
                             </group>
                         </div>

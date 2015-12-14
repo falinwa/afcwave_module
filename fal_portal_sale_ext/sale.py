@@ -30,5 +30,6 @@ class ResUsers(models.Model):
 
     partner_price_list_id = fields.Many2one('product.pricelist', related="partner_id.property_product_pricelist", string="PriceList", required=1)
     partner_sale_person_id = fields.Many2one('res.users', related="partner_id.user_id", string="Sale Person", required=1)
+    partner_country_id = fields.Many2one('res.country', related="partner_id.country_id", string="Country", required=1)
     
 #end of ResUsers()
