@@ -20,7 +20,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
                     <field name="is_fal_payment_term_invisible" invisible="1" />
-                    <field name="fal_payment_term" attrs="{'readonly': [('order_line', '!=', [])], 'invisible': [('is_fal_payment_term_invisible','=',1)]}" />
+                    <field name="fal_payment_term" attrs="{'invisible': ['|', ('order_line', '!=', []),('is_fal_payment_term_invisible','=',1)]}" />
                 </xpath>               
                 <xpath expr="//notebook/page/field[@name='order_line']" position="attributes">
                     <attribute name="attrs">{'invisible': [('fal_payment_term', '=', False), ('is_fal_payment_term_invisible','!=',1)]}</attribute>

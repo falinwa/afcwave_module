@@ -8,10 +8,10 @@ class SaleOrder(models.Model):
     @api.onchange('fal_payment_term')
     def _onchange_fal_payment_term(self):
         if self.fal_payment_term == 'adv':
-            pricelist = self.env['product.pricelist'].search([('name','ilike','net 30')])
+            pricelist = self.env['product.pricelist'].search([('name','ilike','distributor')])
             self.pricelist_id = pricelist and pricelist[0]
         if self.fal_payment_term == 'net30':
-            pricelist = self.env['product.pricelist'].search([('name','ilike','distributor')])
+            pricelist = self.env['product.pricelist'].search([('name','ilike','net 30')])
             self.pricelist_id = pricelist and pricelist[0]
 
     @api.one
