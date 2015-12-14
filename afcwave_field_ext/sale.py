@@ -17,7 +17,7 @@ class SaleOrder(models.Model):
     @api.one
     @api.depends('fal_payment_term')
     def _compute_is_fal_payment_term_invisible(self):
-        if self.pricelist_id.name ilike 'distributor':            
+        if 'distributor' in self.pricelist_id.name.lower():            
             self.is_fal_payment_term_invisible = False
         else:
             self.is_fal_payment_term_invisible = True
