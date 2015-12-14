@@ -130,6 +130,12 @@
             <field name="view_id" ref="view_order_tree_falporsalext"/>
             <field name="act_window_id" ref="portal_sale.action_quotations_portal"/>
         </record>
+        <record id="action_quotations_portal_view1form_falportasext" model="ir.actions.act_window.view">
+            <field eval="10" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_order_form_portal_user_falportalsalext"/>
+            <field name="act_window_id" ref="portal_sale.action_quotations_portal"/>
+        </record>
         
         <record id="action_quotations_portal_view2_falportasext" model="ir.actions.act_window.view">
             <field eval="10" name="sequence"/>
@@ -137,7 +143,12 @@
             <field name="view_id" ref="view_order_tree_falporsalext"/>
             <field name="act_window_id" ref="portal_sale.action_orders_portal"/>
         </record>
-        
+        <record id="action_quotations_portal_view2form_falportasext" model="ir.actions.act_window.view">
+            <field eval="10" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_order_form_portal_user_falportalsalext"/>
+            <field name="act_window_id" ref="portal_sale.action_orders_portal"/>
+        </record>        
         <menuitem id="portal_create_order_falporsalext" parent="portal.portal_orders"
             action="action_orders_falporsalext" sequence="1"/>    
         <menuitem name="PO" id="portal_sale.portal_quotations" parent="portal.portal_orders"

@@ -19,10 +19,11 @@
             <field name="inherit_id" ref="fal_portal_sale_ext.view_order_form_portal_user_falportalsalext" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
-                    <field name="fal_payment_term" attrs="{'readonly': [('order_line', '!=', [])], 'invisible': [('pricelist_id','not ilike','distributor')]}" />
+                    <field name="price_list_id_name" invisible="1" />
+                    <field name="fal_payment_term" attrs="{'readonly': [('order_line', '!=', [])], 'invisible': [('price_list_id_name','not ilike','distributor')]}" />
                 </xpath>               
                 <xpath expr="//notebook/page/field[@name='order_line']" position="attributes">
-                    <attribute name="attrs">{'invisible': [('fal_payment_term', '=', False), ('pricelist_id','ilike','distributor')]}</attribute>
+                    <attribute name="attrs">{'invisible': [('fal_payment_term', '=', False), ('price_list_id_name','ilike','distributor')]}</attribute>
                 </xpath>
                 <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes">
                     <attribute name="invisible">1</attribute>

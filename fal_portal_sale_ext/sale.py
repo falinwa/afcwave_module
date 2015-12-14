@@ -12,6 +12,7 @@ class SaleOrder(models.Model):
                 return self.env.user.partner_id.id
     
     partner_id = fields.Many2one(default=_default_partner_id)
+    price_list_id_name = fields.Char('Price list name', related="pricelist_id.name")
     
 #end of SaleOrder()
 
