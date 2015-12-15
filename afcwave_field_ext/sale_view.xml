@@ -46,6 +46,18 @@
                 </xpath>
             </field>
         </record>
-            
+        
+        <template id="products_item_afcwafextt" name="Product item" inherit_id="website_sale.products_item">
+            <xpath expr="//div[@class='product_price']" position="attributes">
+                <attribute name="style">display: None;</attribute>
+            </xpath>
+        </template>
+        
+        <template id="product_price_afcwafextt" name="Product" inherit_id="website_sale.product_price">
+            <xpath expr="//div[@class='product_price mt16']" position="attributes">
+                <attribute name="style">display: None;</attribute>
+            </xpath>
+        </template>
+        
     </data>
 </openerp>

@@ -7,7 +7,7 @@
     Module to add additional field for AFC WAVE
     """,
     "depends" : [
-        'base', 'report', 'stock', 'sale', 'portal_sale', 'fal_portal_sale_ext', 'purchase'
+        'base', 'report', 'stock', 'sale', 'portal_sale', 'fal_portal_sale_ext', 'purchase', 'website_sale'
         ],
     'init_xml': [],
     'update_xml': [
