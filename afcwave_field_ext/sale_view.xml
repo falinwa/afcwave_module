@@ -59,5 +59,26 @@
             </xpath>
         </template>
         
+        <template id="product_afcwafextt" inherit_id="website_sale.product" name="Product">
+            <xpath expr="//a[@id='add_to_cart']" position="attributes">
+                <attribute name="style">display: None;</attribute>
+            </xpath>
+        </template>
+
+        <template id="product_qty_afcwafextt" inherit_id="website_sale.product_quantity" name="Product">
+            <xpath expr="//div[@class='css_quantity input-group oe_website_spinner']" position="attributes">
+                <attribute name="style">display: None;</attribute>
+            </xpath>
+        </template>
+                
+        <template id="afcwave_web_ext_asset" name="Website afcwave asset" inherit_id="website.assets_frontend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript">
+                var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F374a9e20a4821518ed01cedc5f8d7364' type='text/javascript'%3E%3C/script%3E")); 
+                </script> 
+                <script type="text/javascript" charset="utf-8" async="True" src="http://lxbjs.baidu.com/lxb.js?sid=7968384"></script>
+            </xpath>
+        </template>
+        
     </data>
 </openerp>

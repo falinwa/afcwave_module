@@ -11,9 +11,11 @@
         ],
     'init_xml': [],
     'update_xml': [
-        #'security/ir.model.access.csv',
+        'security/security.xml',
+        'security/ir.model.access.csv',
         'sale_view.xml',
         'purchase_view.xml',
+        'country_manager_view.xml',
     ],
     'css': [],
     'js' : [],

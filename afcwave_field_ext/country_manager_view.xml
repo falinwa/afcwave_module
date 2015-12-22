@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="product_product_tree_view_afcwavext" model="ir.ui.view">
+            <field name="name">product.product.tree.afcwavext</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <tree string="Product Variants">
+                    <field name="default_code"/>
+                    <field name="name"/>
+                    <field name="qty_available"/>
+                    <field name="virtual_available"/>
+                    <field name="uom_id"/>
+                    <field name="ean13"/>
+                    <field name="state" invisible="1"/>
+                    <field name="product_tmpl_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_stock_information" model="ir.actions.act_window">
+            <field name="name">Products Stock Information</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="product_product_tree_view_afcwavext"/>
+            <field name="context">{"search_default_filter_to_sell":1}</field>
+        </record>
+        
+        <menuitem id="menu_country_manager" name="Country Manager" groups="group_country_manager_user" sequence="99"/>
+        <menuitem id="sub_menu_country_manager" parent="menu_country_manager" name="Country Manager" />
+        <menuitem id="sub_menu_item_stock_information" name="Stock Information" parent="sub_menu_country_manager" action="action_stock_information" sequence="1"/>
+        <menuitem id="sub_menu_item_pos_report" name="POS Report" action="sale.action_order_report_all" parent="sub_menu_country_manager" sequence="10"/>
+        
+    </data>
+</openerp>
