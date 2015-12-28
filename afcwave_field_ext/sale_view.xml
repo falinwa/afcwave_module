@@ -73,20 +73,7 @@
                 
         <template id="afcwave_web_ext_asset" name="Website afcwave asset" inherit_id="website.assets_frontend">
             <xpath expr="." position="inside">
-                <script type="text/javascript">
-                    console.log(window.location.pathname);
-                    console.log(window.location.href);
-                    if(window.location.href == 'http://afcwave.com/zh_CN/page/homepage'){
-                        document.write("
-                        <link href='http://www.afcwave.com/web/css/im_livechat.external_lib' rel='stylesheet'/>
-                        <script src='http://www.afcwave.com/web/js/im_livechat.external_lib' type='text/javascript'></script>
-                        <script src='http://www.afcwave.com/im_livechat/loader/afcwave/2' type='text/javascript'></script>")
-                    }else{
-                        document.write("<link href='http://www.afcwave.com/web/css/im_livechat.external_lib' rel='stylesheet'/>
-                        <script src='http://www.afcwave.com/web/js/im_livechat.external_lib' type='text/javascript'></script>
-                        <script src='http://www.afcwave.com/im_livechat/loader/afcwave/1' type='text/javascript'></script>")                   
-                    };
-                </script>
+
             </xpath>
         </template>
         
