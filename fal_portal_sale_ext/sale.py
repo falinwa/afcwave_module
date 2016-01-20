@@ -24,6 +24,14 @@ class SaleOrderLine(models.Model):
     
 #end of SaleOrderLine()
 
+class ResPartner(models.Model):
+    _name = "res.partner"
+    _inherit = "res.partner"
+    
+    region_manager_id = fields.Many2one('res.partner', string="Region Manager", required=1)
+    
+#end of ResPartner
+
 class ResUsers(models.Model):
     _name = "res.users"
     _inherit = "res.users"
@@ -31,5 +39,6 @@ class ResUsers(models.Model):
     partner_price_list_id = fields.Many2one('product.pricelist', related="partner_id.property_product_pricelist", string="PriceList", required=1)
     partner_sale_person_id = fields.Many2one('res.users', related="partner_id.user_id", string="Sale Person", required=1)
     partner_country_id = fields.Many2one('res.country', related="partner_id.country_id", string="Country", required=1)
+    partner_region_manager_id = fields.Many2one('res.partner', related="partner_id.region_manager_id", string="Region Manager", required=1)
     
 #end of ResUsers()

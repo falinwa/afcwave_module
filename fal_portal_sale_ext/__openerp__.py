@@ -6,7 +6,7 @@
     "description": """
     Module to give feature to portal sale to create an order.
     """,
-    "depends" : ['base', 'sale', 'portal_sale', 'web_tree_image', 'fal_sales_report_product_image'],
+    "depends" : ['base', 'sale', 'sale_stock', 'portal_sale', 'web_tree_image', 'fal_sales_report_product_image'],
     'init_xml': [],
     'data': [
     ],
