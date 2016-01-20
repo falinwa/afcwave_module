@@ -87,9 +87,10 @@ class SaleOrderLine(models.Model):
                         uom_record = False
                 if not uom_record:
                     uom_record = product_obj.uom_id
-                compare_qty = float_compare(product_obj.virtual_available, qty, precision_rounding=uom_record.rounding)
+                compare_qty = float_compare(product_obj.qty_available, qty, precision_rounding=uom_record.rounding)
+
                 if compare_qty == -1:
-                    warn_msg = _('Sorry we have not enough stock, current stock is %.2f %s, if you want to oder more, please contact our salesperson by email for pre-order.') % (max(0,product_obj.qty_available), uom_record.name)
+                    warn_msg = _('Sorry we have not enough stock, current stock is %.2f %s, if you want to order more, please contact our salesperson by email for pre-order.') % (max(0,product_obj.qty_available), uom_record.name)
                     warning_msgs += _("Not enough stock ! : ") + warn_msg + "\n\n"
                     
         #update of warning messages
@@ -103,8 +104,7 @@ class SaleOrderLine(models.Model):
     
     fal_box_quantity = fields.Integer(string='Box Quantity')
     product_uom_qty_display = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'), related="product_uom_qty", readonly=1)
-    fal_quantity_available = fields.Float('Available Quantity', related="product_id.qty_available")
-    
+    fal_quantity_available = fields.Float('Available Quantity', related="product_id.qty_available")    
 
 #end of SaleOrderLine()
 
