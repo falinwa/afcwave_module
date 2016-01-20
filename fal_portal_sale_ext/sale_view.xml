@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <form string="Sales Order">
                     <header>
+                        <button name="action_set_checkout" type="object" attrs="{'invisible': [('is_checkout','=',1)]}" string="Checkout" class="oe_highlight"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,sent,progress,done" statusbar_colors='{"invoice_except":"red","waiting_date":"blue"}'/>
                     </header>
                     <sheet>
@@ -87,6 +88,7 @@
                                     <group>
                                         <field name="invoiced"/>
                                         <field name="invoice_exists" invisible="1"/>
+                                        <field name="is_checkout" />
                                     </group>
                                 </group>
                             </page>

@@ -11,7 +11,12 @@ class SaleOrder(models.Model):
             if group.is_portal:                
                 return self.env.user.partner_id.id
     
+    @api.multi
+    def action_set_checkout(self):
+        self.is_checkout = True
+        
     partner_id = fields.Many2one(default=_default_partner_id)
+    is_checkout = fields.Boolean('Is Checkout?')
     
 #end of SaleOrder()
 
@@ -20,7 +25,7 @@ class SaleOrderLine(models.Model):
     
     name_display = fields.Text(string='Description', related="name", readonly="1")
     price_unit_display = fields.Float('Unit Price', related="price_unit", readonly="1")
-    tax_id_display = fields.Many2many('account.tax', string='Taxes', related="tax_id", readonly="1")
+    tax_id_display = fields.Many2many('account.tax', string='Taxes', related="tax_id", readonly="1")    
     
 #end of SaleOrderLine()
 
